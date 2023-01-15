@@ -52,28 +52,15 @@ public class Address {
     public String getPhoneNumber(){return phoneNumber;}
     public String getEmail(){return email;}
 
+    public void setName(String data){firstname = data;}
+    public void setLastName(String data){lastName = data;}
+    public void setAddress(String data){address = data;}
+    public void setCity(String data){city = data;}
+    public void setState(String data){state = data;}
+    public void setZip(String data){zip=data;}
+    public void setPhoneNumber(String data){phoneNumber = data;}
+    public void setEmail(String data){email = data;}
 
-    public void setValue(int n,String data){
-        switch (n){
-            case 0: this.firstname= data;
-            break;
-            case 1: this.lastName= data;
-            break;
-            case 2 : this.address= data;
-            break;
-            case 3: this.city= data;
-            break;
-            case 4 : this.state= data;
-            break;
-            case 5 :this.zip=data;
-            break;
-            case 6 : this.phoneNumber=data;
-            break;
-            case 7 : this.email= data;
-            break;
-            default:break;
-        }
-    }
 
 
 
