@@ -130,7 +130,8 @@ public class AddressBookMain {
 
         Map<String,Long> countCity = contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new, Collectors.counting()));
         countCity.forEach((city, count) -> System.out.println(city+ " has " +"Number of persons "+ count));
-
+        Map<String,Long> countState = contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new, Collectors.counting()));
+        countState.forEach((state, count) -> System.out.println(state+ " has " +"Number of persons "+ count));
 
     }
 
