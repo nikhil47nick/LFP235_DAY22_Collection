@@ -1,41 +1,60 @@
 package Com.BridgeLabz.Collection;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBookMain {
 
-    ArrayList contact = new ArrayList<Address>();
+    List <Address> contact = new ArrayList<>();
+   
 
+    @Override
+    public boolean equals(Object o){
+        for (int i=0;i< contact.size();i++) {
+            Address e = (Address) contact.get(i);
+            if(e.getName().equals(o)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void addEntry(Scanner scr){
+
+
         System.out.println("Enter First Name");
         String firstname = scr.next();
-        System.out.println("Enter Last Name");
-        String lastName = scr.next();
-        System.out.println("Enter Address");
-        String address = scr.next();
-        System.out.println("Enter state");
-        String state = scr.next();
-        System.out.println("Enter city");
-        String city = scr.next();
-        System.out.println("Enter zip");
-        String zip = scr.next();
-        System.out.println("Enter Phone number");
-        String phoneNumber = scr.next();
-        System.out.println("Enter email");
-        String email = scr.next();
-        contact.add(new Address( firstname, lastName, address, city, state, zip, phoneNumber, email));
+        if(!equals(firstname)) {
+            System.out.println("Enter Last Name");
+            String lastName = scr.next();
+            System.out.println("Enter Address");
+            String address = scr.next();
+            System.out.println("Enter state");
+            String state = scr.next();
+            System.out.println("Enter city");
+            String city = scr.next();
+            System.out.println("Enter zip");
+            String zip = scr.next();
+            System.out.println("Enter Phone number");
+            String phoneNumber = scr.next();
+            System.out.println("Enter email");
+            String email = scr.next();
+            contact.add(new Address(firstname, lastName, address, city, state, zip, phoneNumber, email));
 
-        System.out.println("Do you want to add more address press Y to add more N to stop add");
-        char addmore = scr.next().charAt(0);
-        switch (addmore){
-            case 'Y':addEntry(scr);
-            break;
-            case 'N':return;
-            default:
-                System.out.println("Please enter correct");
+            System.out.println("Do you want to add more address press Y to add more N to stop add");
+            char addmore = scr.next().charAt(0);
+            switch (addmore) {
+                case 'Y':
+                    addEntry(scr);
+                    break;
+                case 'N':
+                    return;
+                default:
+                    System.out.println("Please enter correct");
+            }
+        }else{
+            System.out.println("Data already exist");
         }
+
 
     }
 
@@ -50,6 +69,7 @@ public class AddressBookMain {
     }
 
     public int search(String name){
+
         for (int i=0;i< contact.size();i++) {
             Address e = (Address) contact.get(i);
             if(e.getName().equals(name)){
@@ -91,14 +111,14 @@ public class AddressBookMain {
 
 
     public static void main(String[] args) {
-        AddressBookMain new1 = new AddressBookMain();
+        AddressBookMain entry = new AddressBookMain();
         Scanner scr = new Scanner(System.in);
-        new1.addEntry(scr);
-        new1.display();
+        entry.addEntry(scr);
+        entry.display();
         System.out.println("Enter name to delete");
 
         String name = scr.next();
-        new1.removeEntry(name);
+        entry.removeEntry(name);
         scr.close();
     }
 
