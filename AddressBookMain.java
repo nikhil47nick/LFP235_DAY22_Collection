@@ -117,7 +117,12 @@ public class AddressBookMain {
     }
 
     void viewPersons(){
-
+        Map<String,List<String>> nameByCity =
+                contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
+        nameByCity.forEach((city, names) -> System.out.println(city+ " has " +"persons "+ names));
+        Map<String,List<String>> nameByState =
+                contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
+        nameByState.forEach((state, names) -> System.out.println(state+ " has " +" persons "+ names));
     }
 
     void searchByCityOrStateWithNumberOfPerson(){
@@ -134,6 +139,7 @@ public class AddressBookMain {
         Scanner scr = new Scanner(System.in);
         entry.addEntry(scr);
         entry.searchByCityOrStateWithNumberOfPerson();
+        entry.viewPersons();
         scr.close();
 
 
