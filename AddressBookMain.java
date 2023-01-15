@@ -8,8 +8,9 @@ import java.util.stream.Stream;
 public class AddressBookMain {
 
     List<Address> contact = new ArrayList<>();
-   Map<String,String> city = new HashMap();
-    Map<String,String> state = new HashMap();
+
+    Map city = new Hashtable<String,List<String>>();
+    Map state = new Hashtable<String,List<String>>();
 
     @Override
     public boolean equals(Object o){
@@ -43,9 +44,6 @@ public class AddressBookMain {
             System.out.println("Enter email");
             String email = scr.next();
             contact.add(new Address(firstname, lastName, address, city, state, zip, phoneNumber, email));
-
-            this.city.put(city,firstname);
-            this.state.put(state,firstname);
 
             System.out.println("Do you want to add more address press Y to add more N to stop add");
             char addmore = scr.next().charAt(0);
@@ -123,6 +121,8 @@ public class AddressBookMain {
         Map<String,List<String>> nameByState =
                 contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         nameByState.forEach((state, names) -> System.out.println(state+ " has " +" persons "+ names));
+        city.putAll(nameByCity);
+        state.putAll(nameByState);
     }
 
     void searchByCityOrStateWithNumberOfPerson(){
@@ -130,8 +130,11 @@ public class AddressBookMain {
 
         Map<String,Long> countCity = contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new, Collectors.counting()));
         countCity.forEach((city, count) -> System.out.println(city+ " has " +"Number of persons "+ count));
-        Map<String,Long> countState = contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new, Collectors.counting()));
-        countState.forEach((state, count) -> System.out.println(state+ " has " +"Number of persons "+ count));
+
+
+    }
+
+    void dictionaryOfCityAndState(){
 
     }
     public static void main(String[] args) {
